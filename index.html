@@ -1,0 +1,201 @@
+<!doctype html> <html> <head> <meta charset="utf-8"> <title></title> <base href="/vk-test/"> <meta name="description" content=""> <meta name="viewport" content="width=device-width,initial-scale=1"> <!-- Place favicon.ico and apple-touch-icon.png in the root directory --> <link rel="stylesheet" href="styles/vendor.d44f6ec9.css"> <link rel="stylesheet" href="styles/main.1222f1bf.css"> </head> <body ng-controller="AppControllerCtrl"> <!--[if lte IE 8]>
+			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+		<![endif]--> <!-- Add your site or application content here --> <div class="navbar navbar-default navbar-fixed-top"> <div class="" role="navigation"> <div class="container"> <div class="main-logo pull-left"> <a class="navbar-brand" href="#!/lobby" ng-bind="dict_words['logo']"></a> </div> <div id="preloader" ng-hide="hidePreloader"><div id="status">&nbsp;<strong>Loaing...</strong></div></div> <div class=""> <span ng-show="myuser==null" class="pull-right text-center"> <button class="btn btn-primary navbar-btn" ng-click="vkauth()" ng-show="vkLoginVisible"><span ng-bind="dict_words['login_vk']"></span></button> <button class="btn btn-primary navbar-btn" ng-click="fblogin()" ng-show="fbLoginVisible"><span ng-bind="dict_words['login_fb']"></span></button> <!-- 	<button class="btn btn-primary navbar-btn" ng-click="fblogin()" ng-show="platform=='fb' || platform=='local'"><span ng-bind="dict_words['login_fb']"></span></button>
+						 --> <!-- <button class="btn btn-primary navbar-btn" ng-click="fblogin()" ><span ng-bind="dict_words['login_fb']"></span></button> --> </span> </div> <div class="main-header" id="js-navbar-collapse" ng-show="mode =='lobby' && myuser"> <div class="pull-right"> <div class="profile-name"> <div style="margin-bottom: 5px"> <span ng-bind="myuser.first_name"></span> <span ng-bind="myuser.last_name" style="margin-right: 15px"></span> <span class="icon-text"> <img class="score-icon" src="images/star_line_2.png"> <span ng-bind="myuser.rate"></span> </span>&nbsp;&nbsp; <span class="icon-text"> <img class="score-icon" src="images/place_2.png"> <span ng-bind="myuser.pos"> </span> </span> </div> <span class="icon-text"> <span ng-bind="myuser.wins"> </span> </span> <span class="icon-text up-icon"> <span ng-bind="myuser.pats"> </span> </span> <span class="icon-text down-icon"> <span ng-bind="myuser.fails"> </span> </span> </div> <div class="profile-img"> <img src="{{myuser.photo}}" class="player-item-photo pull-right"> </div> </div> <!-- <div class="dropdown pull-right" ng-show="openPlatform">
+							<div class="main-avatar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								
+								<div type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="caret"></span>
+									<span class="sr-only">Toggle Dropdown</span>
+								</div>
+								<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+    								<li><a href="#"  ng-click="logout()" ng-show="myuser">Выход</a></li>
+								</ul>
+							</div>
+						</div>	 --> </div> </div> </div> </div> <div class="container"> <div ng-view=""></div> </div> <div class="footer"> <div class="container"> <p>&#9817 <span ng-bind="dict_words['logo']">Вшахматы 2017</span></p> </div> </div> <!-- <script src="https://vk.com/js/api/openapi.js?146" type="text/javascript"></script> --> <!-- <script src="https://vk.com/js/api/xd_connection.js?2" type="text/javascript"></script> --> <script type="text/javascript">// VK.init({
+			// 	apiId: 6022971 
+			// });
+			
+			// VK.init(function() { 
+			// 	// API initialization succeeded 
+			// 	// Your code here 
+			// 	console.log(VK);
+			// }, function() { 
+			// 	// API initialization failed 
+			// 	// Can reload page here 
+			// 	console.log(' API initialization failed ');
+			// }, '5.68');</script> <!-- Google Analytics: change UA-XXXXX-X to be your site's ID 
+		 <script>
+			 !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+			 (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+			 r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+			 }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			 ga('create', 'UA-XXXXX-X');
+			 ga('send', 'pageview');
+		</script>
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>--> <script src="scripts/vendor.18796d50.js"></script> <script src="scripts/scripts.f3e1ee16.js"></script> <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <script type="text/ng-template" id="modal/alertModal.html"><div class="modal-header">
+					<h3 class="modal-title" id="modal-title-{{$ctrl.name}}" ng-bind="$ctrl.title"></h3>
+			</div>
+			<div class="modal-body" id="modal-body-{{$ctrl.name}}">
+					<span ng-bind="$ctrl.body"></span>
+			</div>
+			 <div class="modal-footer">
+					<button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+				<!--  <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>-->
+			</div></script> <script type="text/ng-template" id="modal/confirmExitGameModal.html"><div class="modal-header">
+				<h3 class="modal-title" id="modal-title-{{$ctrl.name}}" ng-bind="title"></h3>
+			</div>
+			<div class="modal-body" id="modal-body-{{$ctrl.name}}">
+				<span >Если вы покинете страницу будет засчитано поражение.<br/>Уверены что хотите покинуть игру?</span>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary" type="button" ng-click="onOk()">Да, выйти</button>
+				<button class="btn btn-warning" type="button" ng-click="onCancel()">Нет, остаться</button>
+			</div></script> <script type="text/ng-template" id="modal/WelcomeModal.html"><div class="modal-header">
+				<h3 class="modal-title" ><span ><span ng-bind="dict_words['Welcome']"></span> <span ng-bind="dict_words['logo']"></span></span></h3>
+			</div>
+			<div class="modal-body " style="padding: 0px;">
+				<div class="text-container text-center">
+					<div><span ng-bind="dict_words['NeedLogin']"></span></div>
+					<div class="block">
+						<p>	
+							<!-- <fb:login-button show-faces="true" max-rows="1"
+							size="large"></fb:login-button> -->
+								
+							<button class="btn btn-primary navbar-btn" ng-click="$ctrl.ok('vk')" ng-show="$ctrl.vkLoginVisible"><span ng-bind="dict_words['login_vk']"></span></button>
+							<button class="btn btn-primary navbar-btn" ng-click="$ctrl.ok('fb')"  ng-show="$ctrl.fbLoginVisible"><span ng-bind="dict_words['login_fb']"></span></button>
+							
+					</p></div>
+					
+					
+				</div>
+			</div>
+			<div class="modal-footer">
+				<!-- <button class="btn btn-primary" type="button" ng-click="$ctrl.cancel()"><span ng-bind="dict_words['Close']"></span></button> -->
+			</div></script> <script type="text/ng-template" id="modal/OptionsModal.html"><div class="modal-header">
+				<h3 class="modal-title" ><span ><span ng-bind="dict_words['Options']"></span></span></h3>
+			</div>
+			<div class="modal-body " style="padding: 0px;">
+				<div class="text-container text-center">
+					
+					<div class="row">
+						<div class="col-md-6">
+								<span ng-bind="dict_words['SoundVolume']"></span>:
+						</div>
+						<div class="col-md-3">
+								<div range-slider min="0" max="100"  model-max="$ctrl.volume.max"  pin-handle="min"></div>
+						</div>
+						<div class="col-md-3">
+								<span ng-bind="$ctrl.volume.max"></span>%
+						</div>
+								
+					</p></div>
+					
+					
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary" type="button" ng-click="$ctrl.cancel()"><span ng-bind="dict_words['Close']"></span></button>
+			</div></script> <script type="text/ng-template" id="modal/BoardDrawModal.html"><div class="modal-header">
+			</div>
+			<div class="modal-body " style="padding: 0px;">
+				<div class="text-container text-center">
+					<canvas id="canvas" width="500" height="600"></canvas>
+					
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary" type="button" ng-click="$ctrl.cancel()"><span ng-bind="dict_words['Close']"></span></button>
+				<button class="btn btn-primary" type="button" ng-click="$ctrl.share()"><span ng-bind="dict_words['Share']"></span></button>
+			</div></script> <!--
+
+<div class="hide">
+		 <img src="./img/figs/peshka_b_flat.png"/> 
+	
+	 <img src="./img/figs/ladia_b_flat.png"/>  
+	
+	 <img src="./img/figs/kon_b_flat.png"/>  
+	
+		<img src="./img/figs/slon_b_flat.png"/>  
+	
+	 <img src="./img/figs/queen_b_flat.png"/>  
+	
+		<img src="./img/figs/king_b_flat.png"/> 
+	
+			<img src="./img/figs/peshka_w_flat.png"/>  
+	
+		<img src="./img/figs/ladia_w_flat.png"/>
+	
+			<img src="./img/figs/kon_w_flat.png"/>
+	
+		<img src="./img/figs/slon_w_flat.png"/>  
+	
+			<img src="./img/figs/queen_w_flat.png"/> 
+	
+			<img src="./img/figs/king_w_flat.png"/>  
+			
+		</div>--> </body> <div id="fb-root"></div> <script>//   VK.init(function() { 
+//       // API initialization succeeded 
+// 	  // Your code here 
+// 	  console.log('test mobile ok');
+//   }, function() { 
+// 	console.log('test mobile failed');
+//      // API initialization failed 
+//      // Can reload page here 
+// }, '5.60'); 
+
+
+  
+  var sliderEasy = window.sliderEasy;
+//   (function(d, s, id){
+//      var js, fjs = d.getElementsByTagName(s)[0];
+//      if (d.getElementById(id)) {return;}
+//      js = d.createElement(s); js.id = id;
+//      js.src = "//connect.facebook.net/en_US/sdk.js";
+//      fjs.parentNode.insertBefore(js, fjs);
+//    }(document, 'script', 'facebook-jssdk'));
+
+ //var checkLoginState = null;
+ function deleteCookie(name) {
+  document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+//prod
+ //var fbAppId = "1930136477254171";
+ //test
+ var fbAppId ="1439706896109510";
+ function loadFBApi(d, s, id) {
+   var js, fjs = d.getElementsByTagName(s)[0];
+   if (d.getElementById(id)) return;
+   js = d.createElement(s); js.id = id;
+   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId="+fbAppId;
+   fjs.parentNode.insertBefore(js, fjs);
+ };
+
+   function loadVKOpenApi(d,s ,id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "https://vk.com/js/api/openapi.js?146";
+		js.async = true;
+		fjs.parentNode.insertBefore(js, fjs);
+	
+   }
+   function loadVKIframe(d,s ,id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "https://vk.com/js/api/xd_connection.js?2";
+		js.async = true;
+		fjs.parentNode.insertBefore(js, fjs);
+	
+   }
+   function loadVKMobile(d,s ,id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "https://vk.com/js/api/mobile_sdk.js";
+		js.async = true;
+		fjs.parentNode.insertBefore(js, fjs);
+	
+   }</script> </html>
